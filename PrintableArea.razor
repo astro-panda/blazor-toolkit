@@ -1,0 +1,28 @@
+@namespace Blazor.PrintableArea
+
+@using Blazor.PrintableArea.Services
+
+<div id="@Id" class="printable-area">
+    @ChildContent
+</div>
+
+@code {
+    /// <summary>
+    /// The unique Identifier of this printable area
+    /// </summary>
+    private string Id { get; set; } = $"printable-area-{Guid.NewGuid()}";    
+
+    /// <summary>
+    /// The content to be displayed on the printed product
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Service with the 
+    /// </summary>
+    [Inject]
+    private IPrintService printService { get; set; }
+
+    public Task PrintArea() => printService.Print(Id);
+}
