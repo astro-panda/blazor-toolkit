@@ -1,9 +1,9 @@
 
 namespace AstroPanda.Blazor.Toolkit;
 
-public interface IDownloadService
+public interface IDownloadService : IAsyncDisposable
 {
-    Task DownloadLocalAsync(string fileName, Stream stream);
+    Task DownloadLocalAsync(string filename, Stream stream);
 
-    Task DownloadRemoteAsync(string uri); 
+    Task DownloadRemoteAsync(string filename, string uri); 
 }

@@ -1,15 +1,35 @@
+using Microsoft.JSInterop;
 
 namespace AstroPanda.Blazor.Toolkit;
 
 public class DownloadService : IDownloadService
 {
-    public Task DownloadLocalAsync(string fileName, Stream stream)
+    private readonly Lazy<Task<IJSObjectReference>> _embedDownloadServiceTask;
+
+    public DownloadService(IJSRuntime js)
     {
-        throw new NotImplementedException();
+        _embedDownloadServiceTask = new(() => js.InvokeAsync<IJSObjectReference>("import", "./_content/AstroPanda.Blazor.Toolkit/downloadService.js").AsTask());
     }
 
-    public Task DownloadRemoteAsync(string uri)
+    public async ValueTask DisposeAsync()
     {
-        throw new NotImplementedException();
+        if (_embedDownloadServiceTask.IsValueCreated)
+        {
+            var module = await _embedDownloadServiceTask.Value;
+            await module.DisposeAsync();
+        }
+    }
+
+    public async Task DownloadLocalAsync(string filename, Stream stream)
+    {
+        var jsDownloadService = await _embedDownloadServiceTask.Value;
+        using var streamRef = new DotNetStreamReference(stream);
+        await jsDownloadService.InvokeVoidAsync("downloadStream", filename, streamRef);
+    }
+
+    public async Task DownloadRemoteAsync(string filename, string uri)
+    {
+        var jsDownloadService = await _embedDownloadServiceTask.Value;
+        await jsDownloadService.InvokeVoidAsync("downloadFile", filename, uri);
     }
 }
