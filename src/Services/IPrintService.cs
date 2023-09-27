@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
-namespace Blazor.PrintableArea.Services;
+namespace AstroPanda.Blazor.Toolkit.Services;
 
 public interface IPrintService
 {

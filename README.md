@@ -1,2 +1,2 @@
-# Blazor.PrintableArea
-A simple component library to print selected areas of a Blazor app
+# AstroPanda.Blazor.Toolkit
+A simple component library to handle cross-cutting concerns for Blazor apps

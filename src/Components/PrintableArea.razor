@@ -1,6 +1,6 @@
-@namespace Blazor.PrintableArea
+@namespace AstroPanda.Blazor.Toolkit
 
-@using Blazor.PrintableArea.Services
+@using AstroPanda.Blazor.Toolkit.Services
 
 <div id="@Id" class="printable-area">
     @ChildContent
@@ -16,7 +16,7 @@
     /// The content to be displayed on the printed product
     /// </summary>
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent { get; set; } = @<div></div>;
 
     /// <summary>
     /// Service with the 

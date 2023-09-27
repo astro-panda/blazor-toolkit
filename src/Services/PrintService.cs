@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace Blazor.PrintableArea.Services
+namespace AstroPanda.Blazor.Toolkit.Services
 {
     public class PrintService : IPrintService, IAsyncDisposable
     {
@@ -11,7 +11,7 @@ namespace Blazor.PrintableArea.Services
 
         public PrintService(IJSRuntime js)
         {
-            _embedPrintServiceTask = new(() => js.InvokeAsync<IJSObjectReference>("import", "./_content/Blazor.PrintableArea/printService.js").AsTask());
+            _embedPrintServiceTask = new(() => js.InvokeAsync<IJSObjectReference>("import", "./_content/AstroPanda.Blazor.Toolkit/printService.js").AsTask());
         }
 
         public async ValueTask DisposeAsync()
