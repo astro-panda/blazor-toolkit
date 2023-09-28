@@ -3,7 +3,7 @@ export async function downloadStream(filename, stream) {
     const blob = new Blob([arrayBuffer]);
     const url = URL.createObjectURL(blob);
     
-    download(filename, url);
+    downloadFile(filename, url);
 
     URL.revokeObjectURL(url);
 }
