@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddBlazorToolkit(this IServiceCollection services)
     {
         services.TryAddSingleton<IPrintService, PrintService>();
+        services.TryAddSingleton<IDownloadService, DownloadService>();
         return services;
     }
 
