@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroPanda.Blazor.Toolkit",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{04E1DA45-4FDB-4ACE-B236-8FA4C8F5FAEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroPanda.Blazor.Toolkit.Test", "test\AstroPanda.Blazor.Toolkit.Test\AstroPanda.Blazor.Toolkit.Test\AstroPanda.Blazor.Toolkit.Test.csproj", "{FCB43029-3141-45C0-9E11-BC045C8538DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroPanda.Blazor.Toolkit.Test", "test\AstroPanda.Blazor.Toolkit.Test\AstroPanda.Blazor.Toolkit.Test.csproj", "{FCB43029-3141-45C0-9E11-BC045C8538DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
