@@ -11,6 +11,7 @@ on:
 
 env:
   project: src/AstroPanda.Blazor.Toolkit.csproj
+  test_project: test/AstroPanda.Blazor.Toolkit.Test/AstroPanda.Blazor.Toolkit.Test.csproj
 
 jobs:
   build:
@@ -30,7 +31,7 @@ jobs:
       run: dotnet build ${{ env.project }} --no-restore
     
     - name: 🧪 Test
-      run: dotnet test ${{ env.project }} --no-build --verbosity normal
+      run: dotnet test ${{ env.test_project }} --no-build --verbosity normal
       
     - name: 📦 Package
       if: github.event_name == 'release'
