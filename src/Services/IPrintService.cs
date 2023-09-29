@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-
-namespace AstroPanda.Blazor.Toolkit.Services;
+﻿namespace AstroPanda.Blazor.Toolkit;
 
 public interface IPrintService
 {

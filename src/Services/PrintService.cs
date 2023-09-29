@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System;
-using System.Threading.Tasks;
+﻿using Microsoft.JSInterop;
 
-namespace AstroPanda.Blazor.Toolkit.Services
+namespace AstroPanda.Blazor.Toolkit
 {
     public class PrintService : IPrintService, IAsyncDisposable
     {

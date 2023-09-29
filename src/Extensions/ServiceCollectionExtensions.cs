@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using AstroPanda.Blazor.Toolkit.Services;
+using AstroPanda.Blazor.Toolkit;
 
 namespace AstroPanda.Blazor.Toolkit;
 public static class ServiceCollectionExtensions
