@@ -28,7 +28,7 @@ jobs:
       run: dotnet restore ${{ env.project }}
     
     - name: 🛠 Build
-      run: dotnet build ${{ env.project }} --no-restore
+      run: dotnet build ${{ env.project }} --no-restore -c Release
     
     - name: 🧪 Test
       run: dotnet test ${{ env.test_project }} --no-build --verbosity normal
