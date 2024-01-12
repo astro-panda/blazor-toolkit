@@ -10,10 +10,17 @@ public class PersistentStateService<T> : IPersistentStateService<T> where T: new
         _localStorage = localStorage;
     }
 
+    public PersistentStateService(ILocalStorageService localStorage, ISyncLocalStorageService localStorageSync, string localStorageKey)
+    {
+        _localStorageSync = localStorageSync;
+        _localStorage = localStorage;
+        _localStorageKey = localStorageKey;
+    }
+
     private ILocalStorageService _localStorage;
     private ISyncLocalStorageService _localStorageSync;
 
-    private const string _localStorageKey = "PersistentState";
+    private string _localStorageKey = "PersistentState";
 
     public T Properties { get; set; } = new();
 
