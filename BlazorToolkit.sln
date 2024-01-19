@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroPanda.Blazor.Toolkit", "src\AstroPanda.Blazor.Toolkit.csproj", "{30E1015A-A3BB-4FDA-BB5D-3D1054E9196A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{04E1DA45-4FDB-4ACE-B236-8FA4C8F5FAEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroPanda.Blazor.Toolkit.Test", "test\AstroPanda.Blazor.Toolkit.Test\AstroPanda.Blazor.Toolkit.Test.csproj", "{FCB43029-3141-45C0-9E11-BC045C8538DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroPanda.Blazor.Toolkit", "src\AstroPanda.Blazor.Toolkit\AstroPanda.Blazor.Toolkit.csproj", "{A6D08A6F-E503-4D07-A62C-B784BDAC2592}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToolkit.Wasm", "src\BlazorToolkit.Wasm\BlazorToolkit.Wasm.csproj", "{B1B8655B-DF08-4346-978B-5420E3DB7CE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToolkit.Server", "src\BlazorToolkit.Server\BlazorToolkit.Server.csproj", "{CDC42DAE-68EC-47AD-8B2D-1B2093FDD84C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,19 +19,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30E1015A-A3BB-4FDA-BB5D-3D1054E9196A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30E1015A-A3BB-4FDA-BB5D-3D1054E9196A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30E1015A-A3BB-4FDA-BB5D-3D1054E9196A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30E1015A-A3BB-4FDA-BB5D-3D1054E9196A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCB43029-3141-45C0-9E11-BC045C8538DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FCB43029-3141-45C0-9E11-BC045C8538DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCB43029-3141-45C0-9E11-BC045C8538DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCB43029-3141-45C0-9E11-BC045C8538DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D08A6F-E503-4D07-A62C-B784BDAC2592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D08A6F-E503-4D07-A62C-B784BDAC2592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D08A6F-E503-4D07-A62C-B784BDAC2592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D08A6F-E503-4D07-A62C-B784BDAC2592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B8655B-DF08-4346-978B-5420E3DB7CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B8655B-DF08-4346-978B-5420E3DB7CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B8655B-DF08-4346-978B-5420E3DB7CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B8655B-DF08-4346-978B-5420E3DB7CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC42DAE-68EC-47AD-8B2D-1B2093FDD84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC42DAE-68EC-47AD-8B2D-1B2093FDD84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC42DAE-68EC-47AD-8B2D-1B2093FDD84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC42DAE-68EC-47AD-8B2D-1B2093FDD84C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FCB43029-3141-45C0-9E11-BC045C8538DE} = {04E1DA45-4FDB-4ACE-B236-8FA4C8F5FAEE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B91AF317-388D-420B-8A65-C97D485C52F9}
 	EndGlobalSection
 EndGlobal

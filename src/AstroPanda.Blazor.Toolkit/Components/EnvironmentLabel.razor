@@ -1,0 +1,8 @@
+@namespace AstroPanda.Blazor.Toolkit
+
+<div>
+    @if (!string.IsNullOrWhiteSpace(_environment) && _showLabel)
+    {
+        <MudChip Color="@Color" Size="@Size">@_environment</MudChip>
+    }
+</div>
