@@ -1,13 +1,11 @@
+using BlazorComponentBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using AstroPanda.Blazor.Toolkit;
-using BlazorComponentBus;
 using MudBlazor.Services;
 
 namespace AstroPanda.Blazor.Toolkit;
 public static class ServiceCollectionExtensions
 {
-
     /// <summary>
     /// Registers the services from the Blazor Toolkit
     /// DOM
@@ -20,8 +18,9 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IDownloadService, DownloadService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
-        services.AddScoped<ComponentBus>(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus);
+        services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
 
+        services.AddHttpClient();
         services.AddMudServices();
         return services;
     }
