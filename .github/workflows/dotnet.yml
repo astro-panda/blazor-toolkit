@@ -10,7 +10,7 @@ on:
     - published
 
 env:
-  project: src/AstroPanda.Blazor.Toolkit.csproj
+  project: src/AstroPanda.Blazor.Toolkit/AstroPanda.Blazor.Toolkit.csproj
   test_project: test/AstroPanda.Blazor.Toolkit.Test/AstroPanda.Blazor.Toolkit.Test.csproj
 
 jobs:
