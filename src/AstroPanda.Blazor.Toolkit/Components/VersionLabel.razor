@@ -1,0 +1,64 @@
+@namespace AstroPanda.Blazor.Toolkit
+
+@using AstroPanda.Blazor.Toolkit.Options
+@using System.Reflection
+@using System.Net.Http.Json
+
+@if (!string.IsNullOrWhiteSpace(_version))
+{
+    <div class="version-label">
+        <MudText Style="@Style" Class="@Class" Typo="Typo.caption">
+            v. @_version
+        </MudText>
+    </div>
+}
+
+@code {
+    [Inject]
+    private NavigationManager _navManager { get; set; }
+
+    [Parameter]
+    public string ManifestPath { get; set; } = "/manifest.json";
+
+    [Parameter]
+    public VersionFetch VersionFetchType { get; set; } = VersionFetch.Remote;
+
+    [Parameter]
+    public string Style { get; set; } = "position: absolute; bottom: 10px; right: 15px; text-transform:none;";
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    private string _version { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        switch(VersionFetchType)
+        {
+            case VersionFetch.Remote:
+                var _http = new HttpClient()
+                {
+                        BaseAddress = new Uri(_navManager.BaseUri)
+                };
+
+                var config = await _http.GetFromJsonAsync<Manifest>(ManifestPath);
+
+                if (config is null)
+                    break;
+
+                if (config.Version is not null)
+                    _version = config.Version;
+                else if (config.VersionName is not null)
+                    _version = config.VersionName.Substring(0, 8);
+                break;
+            case VersionFetch.ExecutingAssembly:
+                var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                _version = assemblyVersion is null ? "0.0.0" : assemblyVersion.ToString();
+                break;
+            default:
+                break;
+        }
+
+        base.OnInitialized();
+    }
+}

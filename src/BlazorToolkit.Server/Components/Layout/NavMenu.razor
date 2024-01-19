@@ -1,6 +1,9 @@
-﻿<MudNavMenu>
+﻿@using AstroPanda.Blazor.Toolkit
+@using AstroPanda.Blazor.Toolkit.Options
+<MudNavMenu Style="height: 100%;">
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
     <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
     <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
-
+    
+    <VersionLabel VersionFetchType="VersionFetch.ExecutingAssembly"/>
 </MudNavMenu>

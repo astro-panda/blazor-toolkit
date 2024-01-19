@@ -1,6 +1,7 @@
 {
   "name": "BlazorToolkit.Wasm",
   "short_name": "BlazorToolkit.Wasm",
+  "version": "pizza-the-hut",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
