@@ -1,9 +1,8 @@
-@namespace AstroPanda.Blazor.Toolkit
+@namespace AstroPanda.Blazor.Toolkit.Components
 
+@using AstroPanda.Blazor.Toolkit.Services
 @using BlazorComponentBus
 @using AstroPanda.Blazor.Toolkit.Models;
-
-@implements IDisposable
 
 <MudMenu @ref="_contextMenu"
          ActivationEvent="MouseEvent.RightClick"
@@ -23,6 +22,9 @@
     [Inject]
     private ComponentBus _bus { get; set; }
 
+    [Inject]
+    private IContextMenuService _contextMenuService { get; set; }
+
     [Parameter]
     public RenderFragment WrappedContent { get; set; }
 
@@ -33,28 +35,13 @@
 
     private readonly Guid _id = Guid.NewGuid();
 
-    protected override void OnInitialized()
-    {
-        _bus.Subscribe<ContextMenuOpenedMessage>(HandleContextMenuOpened);
-    }
-
-    private void HandleContextMenuOpened(MessageArgs args)
-    {
-        var message = args.GetMessage<ContextMenuOpenedMessage>();
-        if (message.ContextMenuId != _id)
-            _contextMenu.CloseMenu();
-    }
-
     private void HandleIsOpenedChanged(bool isOpen)
     {
         if (isOpen)
-            _bus.Publish(new ContextMenuOpenedMessage(_id));
+            _contextMenuService.AddContextMenu(this);
+        else
+            _contextMenuService.CloseActiveContextMenu(true);
     }
 
     public void Close() => _contextMenu.CloseMenu();
-
-    public void Dispose()
-    {
-        _bus.UnSubscribe<ContextMenuOpenedMessage>(HandleContextMenuOpened);
-    }
 }

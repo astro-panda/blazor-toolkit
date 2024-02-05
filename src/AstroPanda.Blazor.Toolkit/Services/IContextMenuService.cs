@@ -16,5 +16,6 @@ public interface IContextMenuService
     /// <summary>
     /// Closes the active <see cref="GenericContextMenu"/>
     /// </summary>
-    public void CloseActiveContextMenu();
+    /// <param name="calledFromContextMenu">If true it will not tell the context menu to close, preventing loops</param>
+    public void CloseActiveContextMenu(bool calledFromContextMenu = false);
 }
