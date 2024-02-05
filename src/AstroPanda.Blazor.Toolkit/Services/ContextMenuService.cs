@@ -6,7 +6,7 @@ namespace AstroPanda.Blazor.Toolkit.Services;
 internal class ContextMenuService : IContextMenuService
 {
 
-    private static GenericContextMenu _activeContextMenu;
+    private static GenericContextMenu? _activeContextMenu;
 
     public ContextMenuService(IJSRuntime js)
     {
@@ -22,7 +22,7 @@ internal class ContextMenuService : IContextMenuService
     }
 
     [JSInvokable("CloseActiveContextMenu")]
-    public void CloseActiveContextMenu()
+    public void CloseActiveContextMenu(bool calledFromContextMenu = false)
     {
         Console.WriteLine("*** The CloseActiveContextMenu method has been called");
 
