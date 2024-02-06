@@ -9,7 +9,8 @@
          PositionAtCursor="true"
          TransformOrigin="Origin.TopLeft"
          LockScroll="true"
-         IsOpenChanged="HandleIsOpenedChanged">
+         IsOpenChanged="HandleIsOpenedChanged"
+         UserAttributes="_attributes">
     <ActivatorContent>
         @WrappedContent
     </ActivatorContent>
@@ -34,6 +35,8 @@
     private MudMenu _contextMenu { get; set; }
 
     private readonly Guid _id = Guid.NewGuid();
+
+    private Dictionary<string, object> _attributes => new() { { "context-menu-guid", _id } };
 
     private void HandleIsOpenedChanged(bool isOpen)
     {
