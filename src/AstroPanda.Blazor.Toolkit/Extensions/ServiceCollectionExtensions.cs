@@ -2,7 +2,6 @@ using BlazorComponentBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MudBlazor.Services;
-using AstroPanda.Blazor.Toolkit.Services;
 
 namespace AstroPanda.Blazor.Toolkit;
 public static class ServiceCollectionExtensions
@@ -15,9 +14,29 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddBlazorToolkit(this IServiceCollection services)
     {
+#if !BROWSER
+        throw new NotSupportedException("The Blazor Toolkit for Server side rendering must use AddBlazorServerToolkit");
+#endif
+
         services.TryAddSingleton<IPrintService, PrintService>();
         services.TryAddSingleton<IDownloadService, DownloadService>();
-        services.TryAddSingleton<IContextMenuService, ContextMenuService>();
+
+        services.AddScoped<IComponentBus, ComponentBus>();
+        services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
+
+        services.AddHttpClient();
+        services.AddMudServices();
+        return services;
+    }
+
+    public static IServiceCollection AddBlazorServerToolkit(this IServiceCollection services)
+    {
+#if BROWSER
+        throw new NotSupportedException("The Blazor Toolkit for WASM rendering must use AddBlazorToolkit");
+#endif
+
+        services.TryAddScoped<IPrintService, PrintService>();
+        services.TryAddScoped<IDownloadService, DownloadService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
