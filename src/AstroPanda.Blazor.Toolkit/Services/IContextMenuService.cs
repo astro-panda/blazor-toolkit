@@ -11,11 +11,11 @@ public interface IContextMenuService
     /// Takes in a <see cref="GenericContextMenu"/> and makes it the active Context Menu, closing the previously active one
     /// </summary>
     /// <param name="contextMenu">The <see cref="GenericContextMenu"/> to make the active one</param>
-    public void AddContextMenu(GenericContextMenu contextMenu);
+    public Task AddContextMenu(GenericContextMenu contextMenu);
 
     /// <summary>
     /// Closes the active <see cref="GenericContextMenu"/>
     /// </summary>
     /// <param name="calledFromContextMenu">If true it will not tell the context menu to close, preventing loops</param>
-    public void CloseActiveContextMenu(bool calledFromContextMenu = false);
+    public Task CloseActiveContextMenu(bool calledFromContextMenu = false);
 }
