@@ -1,55 +1,13 @@
 @namespace AstroPanda.Blazor.Toolkit.Components
 
-@using AstroPanda.Blazor.Toolkit.Services
-@using BlazorComponentBus
-@using AstroPanda.Blazor.Toolkit.Models;
-
-<MudMenu @ref="_contextMenu"
-         ActivationEvent="MouseEvent.RightClick"
-         PositionAtCursor="true"
-         TransformOrigin="Origin.TopLeft"
-         LockScroll="true"
-         IsOpenChanged="HandleIsOpenedChanged"
-         UserAttributes="_attributes">
-    <ActivatorContent>
-        @WrappedContent
-    </ActivatorContent>
-    <ChildContent>
-        @MenuContent
-    </ChildContent>
-</MudMenu>
+<div @oncontextmenu="OpenContextMenu" @oncontextmenu:preventDefault @oncontextmenu:stopPropagation>
+    @WrappedContent
+</div>
 
 @code {
-    [Inject]
-    private ComponentBus _bus { get; set; }
-
-    [Inject]
-    private IContextMenuService _contextMenuService { get; set; }
-
     [Parameter]
     public RenderFragment WrappedContent { get; set; }
 
     [Parameter]
-    public RenderFragment MenuContent { get; set; }
-
-    private MudMenu _contextMenu { get; set; }
-
-    private readonly Guid _id = Guid.NewGuid();
-
-    private Dictionary<string, object> _attributes => new() { { "context-menu-guid", _id } };
-
-    protected override void OnInitialized()
-    {
-        Console.WriteLine("*** Context Menu initialized");
-    }
-
-    private async Task HandleIsOpenedChanged(bool isOpen)
-    {
-        if (isOpen)
-            await _contextMenuService.AddContextMenu(this);
-        else
-            await _contextMenuService.CloseActiveContextMenu(true);
-    }
-
-    public void Close() => _contextMenu.CloseMenu();
+    public EventCallback<MouseEventArgs> OpenContextMenu { get; set; }
 }

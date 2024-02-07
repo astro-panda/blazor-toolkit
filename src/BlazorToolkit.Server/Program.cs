@@ -1,5 +1,6 @@
 using BlazorToolkit.Server.Components;
 using MudBlazor.Services;
+using AstroPanda.Blazor.Toolkit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddMudServices();
+builder.Services.AddBlazorServerToolkit();
 
 var app = builder.Build();
 
