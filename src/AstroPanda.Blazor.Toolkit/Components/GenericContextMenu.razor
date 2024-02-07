@@ -38,12 +38,17 @@
 
     private Dictionary<string, object> _attributes => new() { { "context-menu-guid", _id } };
 
-    private void HandleIsOpenedChanged(bool isOpen)
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("*** Context Menu initialized");
+    }
+
+    private async Task HandleIsOpenedChanged(bool isOpen)
     {
         if (isOpen)
-            _contextMenuService.AddContextMenu(this);
+            await _contextMenuService.AddContextMenu(this);
         else
-            _contextMenuService.CloseActiveContextMenu(true);
+            await _contextMenuService.CloseActiveContextMenu(true);
     }
 
     public void Close() => _contextMenu.CloseMenu();

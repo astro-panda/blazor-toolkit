@@ -8,28 +8,38 @@ internal class ContextMenuService : IContextMenuService
 
     private static GenericContextMenu? _activeContextMenu;
 
+    private readonly Lazy<Task<IJSObjectReference>> _embedContextMenuServiceTask;
+
     public ContextMenuService(IJSRuntime js)
     {
-        js.InvokeAsync<IJSObjectReference>("import", "./_content/AstroPanda.Blazor.Toolkit/contextMenuService.js");
+        _embedContextMenuServiceTask = new(() => js.InvokeAsync<IJSObjectReference>("import", "./_content/AstroPanda.Blazor.Toolkit/contextMenuService.js").AsTask());
     }
 
-    public void AddContextMenu(GenericContextMenu contextMenu)
+    public async Task AddContextMenu(GenericContextMenu contextMenu)
     {
+        await _embedContextMenuServiceTask.Value;
+
         if (_activeContextMenu is not null)
-            CloseActiveContextMenu();
+            await CloseActiveContextMenu();
 
         _activeContextMenu = contextMenu;
     }
 
     [JSInvokable("CloseActiveContextMenu")]
-    public void CloseActiveContextMenu(bool calledFromContextMenu = false)
+    public async Task CloseActiveContextMenu(bool calledFromContextMenu = false)
     {
         Console.WriteLine("*** The CloseActiveContextMenu method has been called");
 
         if (_activeContextMenu is null)
             return;
 
-        _activeContextMenu.Close();
+        if (!calledFromContextMenu)
+        {
+            await _embedContextMenuServiceTask.Value;
+            _activeContextMenu.Close();
+        }
+
+        if (!calledFromContextMenu)
 
         _activeContextMenu = null;
     }
