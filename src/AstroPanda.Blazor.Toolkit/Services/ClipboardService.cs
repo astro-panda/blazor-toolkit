@@ -7,7 +7,7 @@ public class ClipboardService : IClipboardService, IAsyncDisposable
     private readonly IJSRuntime _jsInterop;
     private IJSObjectReference? module;    
 
-    public ClipboardService(IJSRuntime jsInterop, ISnackbar snackbar)
+    public ClipboardService(IJSRuntime jsInterop)
     {
         _jsInterop = jsInterop;        
     }
