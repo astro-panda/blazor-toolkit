@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
 
         services.TryAddSingleton<IPrintService, PrintService>();
         services.TryAddSingleton<IDownloadService, DownloadService>();
+        services.TryAddSingleton<IClipboardService, ClipboardService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
@@ -37,6 +38,7 @@ public static class ServiceCollectionExtensions
 
         services.TryAddScoped<IPrintService, PrintService>();
         services.TryAddScoped<IDownloadService, DownloadService>();
+        services.TryAddScoped<IClipboardService, ClipboardService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
