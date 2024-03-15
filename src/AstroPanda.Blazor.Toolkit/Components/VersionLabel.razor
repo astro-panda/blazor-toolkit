@@ -46,9 +46,9 @@
                 if (config is null)
                     break;
 
-                if (config.Version is not null)
+                if (string.IsNullOrWhiteSpace(config.Version) == false)
                     _version = config.Version;
-                else if (config.VersionName is not null)
+                else if (string.IsNullOrWhiteSpace(config.VersionName) == false)
                     _version = config.VersionName.Substring(0, 8);
                 break;
             case VersionFetch.ExecutingAssembly:
