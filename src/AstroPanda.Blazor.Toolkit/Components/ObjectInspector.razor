@@ -1,0 +1,31 @@
+@namespace AstroPanda.Blazor.Toolkit
+
+@using System.Text.Json
+<MudPaper Class="@Class">
+  @if (Item is not null)
+  {
+    <pre>
+      @(JsonSerializer.Serialize(Item, Options))
+    </pre>
+  }
+  else
+  {
+    <pre>
+      Inspected item is null
+    </pre>
+  }
+</MudPaper>
+
+@code {
+    [Parameter]
+    public object Item { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+  private JsonSerializerOptions Options => new JsonSerializerOptions() 
+  { 
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase, 
+    WriteIndented = true 
+  };
+}
