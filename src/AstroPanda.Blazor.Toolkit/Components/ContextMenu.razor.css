@@ -1,0 +1,11 @@
+﻿.context-menu {
+    position: fixed;
+    min-width: 200px;
+    height: auto;
+    overflow: hidden;
+    background-color: #eee;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 4px rgba(0,0,0,.7);
+    border-radius: 4px;
+}
