@@ -1,11 +1,14 @@
 ﻿@inherits LayoutComponentBase
 @using AstroPanda.Blazor.Toolkit
+@using AstroPanda.Blazor.Toolkit.Services
 @using BlazorToolkit.Wasm.Components
+@using AstroPanda.Blazor.Toolkit.Components
 @using MudBlazor
 
 <MyMudThemeProvider />
 <MyMudProviders />
-
+<ContextMenuProvider @ref="cxt"/>
+<div class="page" @onclick="CloseContextMenus">
 <MudLayout>
     <MudAppBar Elevation="0">
 		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
@@ -24,18 +27,32 @@
         </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
-    <MudMainContent>
+    <MudMainContent >
+        <div @oncontextmenu="OpenContextMenu" @oncontextmenu:preventDefault @oncontextmenu:stopPropagation>
         <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
             @Body
         </MudContainer>
+         </div>
     </MudMainContent>
 </MudLayout>
+</div>
 
 @code {
+    [Inject]
+    private IContextMenuService _contextService { get; set; }
+
     bool _drawerOpen = true;
+    private ContextMenuProvider cxt { get; set; }
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private void CloseContextMenus() => cxt.CloseAll();
+
+    private void OpenContextMenu(MouseEventArgs e)
+    {
+        _contextService.Open<ExampleContextMenu>(e.ClientX, e.ClientY);
     }
 }
