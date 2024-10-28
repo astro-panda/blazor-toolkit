@@ -1,0 +1,18 @@
+﻿@using AstroPanda.Blazor.Toolkit.Services
+<MudPaper>
+    <MudButton OnClick="Close">Close</MudButton>
+</MudPaper>
+
+@code {
+    [Inject]
+    private IContextMenuService _contextService { get; set; }
+
+    [Inject]
+    private ISnackbar _snackbar { get; set; }
+
+    private void Close() 
+    {
+        _snackbar.Add("Close Pressed");
+        _contextService.Close();
+    }
+}
