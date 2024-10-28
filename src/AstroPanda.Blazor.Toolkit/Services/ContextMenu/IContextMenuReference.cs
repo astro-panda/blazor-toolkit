@@ -1,5 +1,5 @@
 ﻿
-namespace AstroPanda.Blazor.Toolkit.Services;
+namespace AstroPanda.Blazor.Toolkit;
 
 public interface IContextMenuReference
 {
