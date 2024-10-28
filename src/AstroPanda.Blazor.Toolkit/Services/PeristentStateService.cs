@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
 
-namespace AstroPanda.Blazor.Toolkit.Services;
+namespace AstroPanda.Blazor.Toolkit
 
 public class PersistentStateService<T> : IPersistentStateService<T> where T: new()
 {

@@ -1,7 +1,6 @@
-﻿using AstroPanda.Blazor.Toolkit.Components;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
-namespace AstroPanda.Blazor.Toolkit.Services;
+namespace AstroPanda.Blazor.Toolkit;
 
 public class ContextMenuService : IContextMenuService
 {

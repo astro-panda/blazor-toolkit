@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AstroPanda.Blazor.Toolkit.Services;
+namespace AstroPanda.Blazor.Toolkit
 
 public interface IPersistentStateService<T>
 {

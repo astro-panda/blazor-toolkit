@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace AstroPanda.Blazor.Toolkit.Components
+namespace AstroPanda.Blazor.Toolkit
 {
     public partial class ContextMenu
     {
