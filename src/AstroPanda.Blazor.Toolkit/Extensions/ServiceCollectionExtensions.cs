@@ -26,8 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
 
-        services.AddHttpClient();
-        services.AddMudServices();
+        services.AddHttpClient();        
         return services;
     }
 
@@ -45,8 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
 
-        services.AddHttpClient();
-        services.AddMudServices();
+        services.AddHttpClient();        
         return services;
     }
 
