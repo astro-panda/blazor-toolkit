@@ -59,7 +59,12 @@
           var versionAttr = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
           if (versionAttr is not null)
           {
-            _version = versionAttr.InformationalVersion;
+            var version = versionAttr.InformationalVersion;
+            
+             if (string.IsNullOrWhiteSpace(version))
+                version = "0.0.0";       
+            
+            _version = version.Split('+').FirstOrDefault() ?? "0.0.0";
           }
         }
         break;
