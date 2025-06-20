@@ -1,3 +1,5 @@
+using AstroPanda.Blazor.Toolkit.Services;
+
 using BlazorComponentBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -22,6 +24,7 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IDownloadService, DownloadService>();
         services.TryAddSingleton<IClipboardService, ClipboardService>();
         services.TryAddScoped<IContextMenuService, ContextMenuService>();
+        services.TryAddScoped<IDeviceService, DeviceService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
@@ -40,6 +43,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<IDownloadService, DownloadService>();
         services.TryAddScoped<IClipboardService, ClipboardService>();
         services.TryAddScoped<IContextMenuService, ContextMenuService>();
+        services.TryAddScoped<IDeviceService, DeviceService>();
 
         services.AddScoped<IComponentBus, ComponentBus>();
         services.AddScoped(sp => sp.GetRequiredService<IComponentBus>() as ComponentBus ?? new ComponentBus());
