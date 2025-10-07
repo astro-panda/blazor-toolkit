@@ -60,10 +60,10 @@
           if (versionAttr is not null)
           {
             var version = versionAttr.InformationalVersion;
-            
-             if (string.IsNullOrWhiteSpace(version))
-                version = "0.0.0";       
-            
+
+            if (string.IsNullOrWhiteSpace(version))
+              version = "0.0.0";
+
             _version = version.Split('+').FirstOrDefault() ?? "0.0.0";
           }
         }
@@ -72,6 +72,6 @@
         break;
     }
 
-    base.OnInitialized();
+    await base.OnInitializedAsync();
   }
 }
