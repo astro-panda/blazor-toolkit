@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorComponentBus" Version="2.2.0" />
-    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />    
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+    <PackageReference Include="CsvHelper" Version="33.1.0" />    
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
