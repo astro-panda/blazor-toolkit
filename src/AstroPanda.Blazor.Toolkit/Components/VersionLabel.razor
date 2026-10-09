@@ -31,6 +31,9 @@
   public VersionPart VersionPart { get; set; } = VersionPart.Version;
 
   [Parameter]
+  public int VersionLength { get; set; } = 8;
+
+  [Parameter]
   public string Style { get; set; } = "position: absolute; bottom: 10px; right: 15px; text-transform:none;";
 
   [Parameter]
@@ -73,7 +76,7 @@
 
             if (VersionPart == VersionPart.Full)
             {
-              _version = version;
+              _version = version.Substring(0, Math.Min(VersionLength, version.Length));
               break;
             }
 
@@ -81,10 +84,13 @@
 
             if (VersionPart == VersionPart.CommitHash)
             {
-              _version = versionParts.Length > 1 ? versionParts[1].Substring(0, Math.Min(8, versionParts[1].Length)) : "unknown";
+              _version = versionParts.Length > 1 ? versionParts[1].Substring(0, Math.Min(VersionLength, versionParts[1].Length)) : "unknown";
             }
             else
             {
+                // If VersionPart is Version or any other value, we take the first part of the version string (before the '+') and use that as the version.
+                // we're just going to trust that it is not ridicuilously long and not truncate it. 
+                // If it is too long, the user can always set VersionLength to a smaller value.                
               _version = versionParts.FirstOrDefault() ?? "unknown";
             }
           }
