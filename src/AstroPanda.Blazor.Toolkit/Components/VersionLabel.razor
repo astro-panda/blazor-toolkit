@@ -1,21 +1,25 @@
 @namespace AstroPanda.Blazor.Toolkit
 
-@using AstroPanda.Blazor.Toolkit.Options
-@using System.Reflection
 @using System.Net.Http.Json
+@using System.Reflection
+@using AstroPanda.Blazor.Toolkit.Options
+@using Microsoft.Extensions.Logging
 
 @if (!string.IsNullOrWhiteSpace(_version))
 {
   <div class="version-label">
     <MudText Style="@Style" Class="@Class" Typo="Typo.caption">
-      v. @_version
+      @Prefix@_version
     </MudText>
   </div>
 }
 
 @code {
   [Inject]
-  private NavigationManager _navManager { get; set; }
+  private ILogger<VersionLabel> _logger { get; set; }
+
+  [Inject]
+  private HttpClient _httpClient { get; set; }
 
   [Parameter]
   public string ManifestPath { get; set; } = "/manifest.json";
@@ -24,10 +28,16 @@
   public VersionFetch VersionFetchType { get; set; } = VersionFetch.Remote;
 
   [Parameter]
+  public VersionPart VersionPart { get; set; } = VersionPart.Version;
+
+  [Parameter]
   public string Style { get; set; } = "position: absolute; bottom: 10px; right: 15px; text-transform:none;";
 
   [Parameter]
   public string Class { get; set; } = string.Empty;
+
+  [Parameter]
+  public string Prefix { get; set; } = "v. ";
 
   private string _version { get; set; } = string.Empty;
 
@@ -36,12 +46,8 @@
     switch (VersionFetchType)
     {
       case VersionFetch.Remote:
-        var _http = new HttpClient()
-        {
-          BaseAddress = new Uri(_navManager.BaseUri)
-        };
-
-        var config = await _http.GetFromJsonAsync<Manifest>(ManifestPath);
+        // Add a cache-busting query parameter to ensure we get the latest manifest
+        var config = await _httpClient.GetFromJsonAsync<Manifest>($"{ManifestPath}?v={DateTime.Now.Ticks}");
 
         if (config is null)
           break;
@@ -49,8 +55,9 @@
         if (string.IsNullOrWhiteSpace(config.Version) == false)
           _version = config.Version;
         else if (string.IsNullOrWhiteSpace(config.VersionName) == false)
-          _version = config.VersionName.Substring(0, 8);
+          _version = config.VersionName.Substring(0, Math.Min(8, config.VersionName.Length));
         break;
+
       case VersionFetch.ExecutingAssembly:
         var assembly = Assembly.GetEntryAssembly();
 
@@ -62,16 +69,39 @@
             var version = versionAttr.InformationalVersion;
 
             if (string.IsNullOrWhiteSpace(version))
-              version = "0.0.0";
+              version = "unknown";
 
-            _version = version.Split('+').FirstOrDefault() ?? "0.0.0";
+            if (VersionPart == VersionPart.Full)
+            {
+              _version = version;
+              break;
+            }
+
+            string[] versionParts = version.Split('+');
+
+            if (VersionPart == VersionPart.CommitHash)
+            {
+              _version = versionParts.Length > 1 ? versionParts[1].Substring(0, Math.Min(8, versionParts[1].Length)) : "unknown";
+            }
+            else
+            {
+              _version = versionParts.FirstOrDefault() ?? "unknown";
+            }
+          }
+          else
+          {
+            _logger.LogWarning("AssemblyInformationalVersionAttribute not found on assembly {AssemblyName}", assembly.GetName().Name);
           }
         }
+        else
+        {
+          _logger.LogWarning("Entry assembly not found.");
+        }
         break;
+
       default:
+        _logger.LogWarning("Unknown VersionFetchType: {VersionFetchType}", VersionFetchType);
         break;
     }
-
-    await base.OnInitializedAsync();
   }
 }
